@@ -3,20 +3,21 @@ import ChampionSearch from "./components/ChampionSearch";
 import ChampionCard from "./components/ChampionCard";
 import { fetchChampionData } from "./api/championAPI";
 
-function App() {
-    const [championData, setChampionData] = useState(null);
+const App = () => {
+    const [selectedChampion, setSelectedChampion] = useState(null);
 
-    const handleSearch = (championName) => {
-        fetchChampionData(championName).then((data) => setChampionData(data));
+    const handleSearch = async (championName) => {
+        const data = await fetchChampionData(championName);
+        setSelectedChampion(data);
     };
 
     return (
-        <div>
-            <h1>League of Legends Counter Items</h1>
+        <div className="container">
+            <h1>League of Legends Champion Counter</h1>
             <ChampionSearch onSearch={handleSearch} />
-            {championData && <ChampionCard championData={championData} />}
+            {selectedChampion && <ChampionCard champion={selectedChampion} />}
         </div>
     );
-}
+};
 
 export default App;

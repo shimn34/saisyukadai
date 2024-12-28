@@ -1,31 +1,22 @@
 import React from "react";
 
-function ChampionCard({ championData }) {
+const ChampionCard = ({ champion }) => {
     return (
-        <div>
-            <h2>{championData.name}</h2>
+        <div className="card">
             <img
-                src={`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${championData.name}_0.jpg`}
-                alt={championData.name}
+                src={`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.name}_0.jpg`}
+                alt={champion.name}
             />
-            <div>
-                <h3>Counter Items:</h3>
-                <ul>
-                    {championData.counterItems.map((item) => (
-                        <li key={item.id}>
-                            <img
-                                src={`https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/${item.id}.png`}
-                                alt={item.name}
-                                width="50"
-                                height="50"
-                            />
-                            {item.name}
-                        </li>
-                    ))}
-                </ul>
+            <h2>{champion.name}</h2>
+            <div className="items">
+                {champion.counterItems.map((item, index) => (
+                    <div key={index} className="item">
+                        <img src={item} alt={`Item ${index + 1}`} />
+                    </div>
+                ))}
             </div>
         </div>
     );
-}
+};
 
 export default ChampionCard;
